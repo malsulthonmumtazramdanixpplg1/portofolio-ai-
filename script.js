@@ -1,22 +1,21 @@
-// 1. Fitur Toggle Dark Mode
-const themeToggleBtn = document.getElementById('theme-toggle');
+const teks = "M.R AL";
+let index = 0;
+const elemen = document.getElementById("nama-ketik");
 
-themeToggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-theme');
-    
-    // Ubah ikon tombol
-    if (document.body.classList.contains('dark-theme')) {
-        themeToggleBtn.textContent = '☀️';
-    } else {
-        themeToggleBtn.textContent = '🌙';
-    }
-});
+function ketikNama() {
+  if (index < teks.length) {
+    elemen.innerHTML += teks.charAt(index);
+    index++;
+    setTimeout(ketikNama, 200); // Kecepatan mengetik per huruf (200ms)
+  } else {
+    // Opsional: Tunggu 3 detik lalu mengulang dari awal
+    setTimeout(() => {
+      elemen.innerHTML = "";
+      index = 0;
+      ketikNama();
+    }, 3000);
+  }
+}
 
-// 2. Handling Form Submit (Contoh Notifikasi)
-const contactForm = document.getElementById('contact-form');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Mencegah reload halaman
-    alert('Pesan Anda telah berhasil dikirim!');
-    contactForm.reset(); // Reset isi form
-});
+// Jalankan fungsi setelah seluruh halaman dimuat
+window.addEventListener("DOMContentLoaded", ketikNama);

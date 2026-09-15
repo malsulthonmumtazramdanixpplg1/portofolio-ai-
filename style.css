@@ -42,18 +42,133 @@ header nav ul li a {
     font-weight: 600;
 }
 
-/* Hero Section */
+/* Layout Utama Hero */
 .hero {
-    height: 100vh;
+    position: relative;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 10%;
-    margin-top: 60px;
+    background-color: #0f172a;
+    overflow: hidden;
+}
+
+/* Efek Cahaya Pendar di Latar Belakang */
+.hero-glow {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(15, 23, 42, 0) 70%);
+    top: 20%;
+    right: 15%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Text Section */
+.hero-text {
+    max-width: 550px;
+    z-index: 2;
+}
+
+/* Badge Status "Available" */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(56, 189, 248, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+    }
+}
+
+/* Typography Hero */
+.hero-text h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
 }
 
 .hero .highlight {
-    color: #007bff;
+    color: #38bdf8;
+}
+
+.hero-description {
+    color: #94a3b8;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Styling Tombol Aksi */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #ffffff;
+    transform: translateY(-3px);
 }
 
 .hero img {
@@ -63,23 +178,46 @@ header nav ul li a {
     border-radius: 20px;
     object-fit: cover;
 
-    /* --- HIGHLIGHT PADA SISI GAMBAR --- */
-    /* Menggunakan box-shadow dengan warna biru terang neon */
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.6),
-        0 0 50px rgba(56, 189, 248, 0.2);
-
-    /* Opsional: Efek garis tepi (border) tipis agar makin tegas */
+    /* Highlight pendaran di sekeliling gambar */
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.6), 
+                0 0 50px rgba(56, 189, 248, 0.2);
     border: 2px solid rgba(56, 189, 248, 0.5);
 
-    /* Animasi halus saat hover */
-    transition: all 0.3s ease;
+    /* --- EFEK POSISI MIRING AWAL --- */
+    transform: rotate(-6deg); /* Miring ke kiri 6 derajat (bisa ganti 6deg jika mau miring ke kanan) */
+    
+    /* Durasi pergerakan agar halus saat kursor datang/pergi */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
 }
 
-/* Efek saat kursor diarahkan ke foto (Highlight makin menyala) */
+/* --- EFEK SAAT KURSOR DATANG (HOVER) --- */
 .hero img:hover {
-    box-shadow: 0 0 35px rgba(56, 189, 248, 0.9),
-        0 0 70px rgba(56, 189, 248, 0.4);
-    transform: translateY(-5px);
+    /* Kembali tegak/lurus & sedikit membesar */
+    transform: rotate(0deg) scale(1.03); 
+    
+    /* Highlight makin menyala saat diluruskan */
+    box-shadow: 0 0 35px rgba(56, 189, 248, 0.9), 
+                0 0 70px rgba(56, 189, 248, 0.4);
+}
+
+.img-wrapper {
+    position: relative;
+    max-width: 320px;
+}
+
+.hero-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+    object-fit: cover;
+    border: 2px solid rgba(56, 189, 248, 0.4);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+    transition: all 0.4s ease;
+}
+
+.hero-img img:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 45px rgba(56, 189, 248, 0.6);
 }
 
 .btn {
@@ -119,20 +257,133 @@ section {
     border-radius: 5px;
 }
 
-/* Form Kontak */
-.contact form {
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-    margin: 20px 0;
+/* Container Utama Contact */
+.contact {
+    padding: 90px 10%;
+    background: #0f172a;
+    color: #ffffff;
 }
 
-.contact input,
-.contact textarea {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.contact-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contact-header h2 {
+    font-size: 2.3rem;
+    margin-bottom: 10px;
+}
+
+.contact-header p {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+/* Grid Layout 2 Kolom */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+/* Kartu Info Kontak (Sebelah Kiri) */
+.contact-info {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 35px;
+    border-radius: 24px;
+}
+
+.contact-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #38bdf8;
+}
+
+.contact-info>p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.info-item .icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.info-item h4 {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.info-item p {
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Styling Form (Sebelah Kanan) */
+.contact-form {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #64748b;
+}
+
+/* Efek saat Input diklik (Focus) */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.contact-form .btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
 }
 
 /* Footer */
@@ -359,4 +610,24 @@ body {
     background: #38bdf8;
     color: #0f172a;
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+}
+
+/* Efek Kursor Mengetik */
+#nama-ketik::after {
+    content: '|';
+    animation: kedip 0.7s infinite;
+    color: #38bdf8;
+    margin-left: 2px;
+}
+
+@keyframes kedip {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
