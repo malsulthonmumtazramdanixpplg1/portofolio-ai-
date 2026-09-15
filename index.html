@@ -21,7 +21,7 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">Tentang</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#projects">Proyek</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
@@ -30,23 +30,42 @@
     </header>
     <!-- 2. HERO SECTION (HOME) -->
     <section id="home" class="hero">
+        <!-- Efek Cahaya Latar Belakang (Glow Blob) -->
+        <div class="hero-glow"></div>
+
         <div class="hero-text">
-            <h1 class="gerak-pudar">Halo, Saya <span class="highlight">M.R AL</span></h1>
-            <p>Saya seorang Web Developer / UI/UX Designer</p>
-            <a href="#contact" class="btn">Hubungi Saya</a>
+            <!-- Badge Status Modern -->
+            <div class="status-badge">
+                <span class="pulse-dot"></span> Available for projects
+            </div>
+
+            <h1 class="gerak-pudar">
+                Halo, Saya <span class="highlight" id="nama-ketik"></span>
+
+                <p class="hero-description">
+                    Web Developer & UI/UX Designer yang berfokus menciptakan website modern, interaktif, dan responsif.
+                </p>
+
+                <!-- Grouping Tombol Aksi -->
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Contact Me</a>
+                    <a href="assets/cv.pdf" target="_blank" class="btn btn-secondary">Download CV</a>
+                </div>
         </div>
+
         <div class="hero-img">
-            <img src="al.png" alt="Foto Profil">
+            <div class="img-wrapper">
+                <img src="al.png" alt="Foto Profil">
+            </div>
         </div>
     </section>
-
     <!-- 3. ABOUT SECTION (TENTANG SAYA & SKILL) -->
     <section id="about" class="about">
         <div class="about-container">
 
             <!-- Kartu Deskripsi -->
             <div class="about-card intro-card">
-                <h2>Tentang <span class="highlight">Saya</span></h2>
+                <h2>About <span class="highlight">Me</span></h2>
                 <p>
                     Halo! Saya <strong>M.R AL</strong>, seorang Web Developer & UI/UX Designer yang berfokus menciptakan
                     pengalaman digital yang menarik, responsif, dan mudah digunakan. Saya suka mengubah ide-ide kreatif
@@ -69,23 +88,95 @@
         </div>
     </section>
 
-    <!-- 5. CONTACT SECTION (KONTAK) -->
     <section id="contact" class="contact">
-        <h2>Hubungi Saya</h2>
-        <form id="contact-form">
-            <input type="text" placeholder="Nama Anda" required>
-            <input type="email" placeholder="Email Anda" required>
-            <textarea placeholder="Pesan Anda" rows="5" required></textarea>
-            <button type="submit" class="btn">Kirim Pesan</button>
-        </form>
-    </section>
+        <div class="contact-header">
+            <h2>Hubungi <span class="highlight">Saya</span></h2>
+            <p>Tertarik untuk bekerja sama atau punya pertanyaan? Silakan kirim pesan!</p>
+        </div>
 
+        <div class="contact-container">
+            <!-- Kartu Informasi Kontak Langsung -->
+            <div class="contact-info">
+                <h3>Informasi Kontak</h3>
+                <p>Jangan ragu untuk menghubungi saya melalui platform di bawah ini.</p>
+
+                <div class="info-item">
+                    <div class="icon">📧</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>sulthonmumtazramdani@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="icon">📱</div>
+                    <div>
+                        <h4>WhatsApp</h4>
+                        <p>+62 813-1125-579</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="icon">📍</div>
+                    <div>
+                        <h4>Lokasi</h4>
+                        <p>Cianjur</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. Panggil Script SDK EmailJS di head atau sebelum body -->
+            <script type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+            <!-- 2. Form HTML -->
+            <form id="contact-form" class="contact-form">
+                <div class="input-group">
+                    <input type="text" id="from_name" name="from_name" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="reply_to" name="reply_to" placeholder="Alamat Email" required>
+                </div>
+                <div class="input-group">
+                    <textarea id="message" name="message" placeholder="Tuliskan pesan Anda di sini..." rows="5"
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Kirim Pesan 🚀</button>
+            </form>
+
+            <!-- 3. Script Inisialisasi EmailJS -->
+            <script>
+                // Inisialisasi dengan Public Key kamu
+                emailjs.init("PUBLIC_KEY_KAMU");
+
+                const btn = document.querySelector('button[type="submit"]');
+
+                document.getElementById('contact-form').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    btn.innerText = 'Mengirim...';
+
+                    // Kirim data form via EmailJS
+                    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                        .then(() => {
+                            btn.innerText = 'Kirim Pesan 🚀';
+                            alert('Pesan berhasil terkirim!');
+                            this.reset();
+                        }, (err) => {
+                            btn.innerText = 'Kirim Pesan 🚀';
+                            alert('Gagal mengirim pesan: ' + JSON.stringify(err));
+                        });
+                });
+            </script>
+        </div>
+    </section>
     <!-- 6. FOOTER -->
     <footer>
         <p>&copy; 2026 Al Sulthon. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
+
 </body>
 
 </html>
